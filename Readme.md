@@ -10,6 +10,15 @@ It aims to provide a production-grade and user-friendly API in a modern and safe
 
 For those interested, it can also help getting a deep understanding of GLiNER's operation.
 
+## 📌 Latest News 
+
+### 🎉 Version `1.0.0` is out !  
+Following extensive testing across various environments, `gline-rs` is now considered ready for production!
+
+### ⚠️ Broken builds with `0.9.x`
+
+Due to missing pins in `ort` prior to the rc.10 release (see [this issue](https://github.com/pykeio/ort/issues/399)), some builds may have broken with `gline-rs` 0.9.4 and earlier. Version 1.0.0 prevents this by explicitly pinning the transitive dependency (until it adopts `ort` rc.10).
+
 ## 💡 Background and Motivation
 
 Common drawbacks of machine learning systems include cryptic implementations and high resource consumption. `gline-rs` aims to take a step toward a more maintainable and sustainable approach. 🌱

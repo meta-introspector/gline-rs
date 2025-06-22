@@ -5,9 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [0.9.5] - UNRELEASED
+## [1.0.0] - 2025-06-22
 
-- ...
+### Fixed 
+
+- Pin the `rc.9` version of `ort-sys` (`ort` was not doing so before `rc.10`, which would break builds of crates that depend on earlier versions, see [this issue](https://github.com/pykeio/ort/issues/399)).
+
 
 ## [0.9.4] - 2025-03-30
 

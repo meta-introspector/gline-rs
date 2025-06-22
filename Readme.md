@@ -2,9 +2,9 @@
 
 ## 💬 Introduction
 
-`gline-rs` is an inference engine for [GLiNER](https://github.com/urchade/GLiNER) models. These language models proved to be efficient at zero-shot [Named Entity Recognition](https://paperswithcode.com/task/cg) (NER) and other tasks such as [Relation Extraction](https://paperswithcode.com/task/relation-extraction), while consuming less resources than large generative models (LLMs).
+`gline-rs` is an inference engine for [GLiNER](https://github.com/urchade/GLiNER) models. These language models proved to be efficient at **zero-shot** [Named Entity Recognition](https://paperswithcode.com/task/cg) (NER) and other tasks such as [Relation Extraction](https://paperswithcode.com/task/relation-extraction), while consuming less resources than large generative models (LLMs).
 
-This implementation has been written from the ground up in Rust, and supports both span- and token-oriented variants (for inference only). It is based on a flexible pipeline architecture with ready-to-use implementations for NER and other tasks like Relation Extraction.
+This implementation has been written from the ground up in Rust, and supports both span- and token-oriented variants (for inference only). It is based on a flexible pipeline architecture with ready-to-use implementations for NER and Relation Extraction.
 
 It aims to provide a production-grade and user-friendly API in a modern and safe programming language, including a clean and maintainable implementation of the mechanics surrounding these models.
 
@@ -35,7 +35,7 @@ Include `gline-rs` as a regular dependency in your `Cargo.toml`:
 
 ```toml
 [dependencies]
-"gline-rs" = "0.9.x"
+"gline-rs" = "1"
 ```
 
 The public API is self-explanatory:
@@ -77,22 +77,6 @@ Ready-to-use models can be downloaded from 🤗 Hugging Face repositories. For e
 * [gliner small 2.1](https://huggingface.co/onnx-community/gliner_small-v2.1) ([original](https://huggingface.co/urchade/gliner_small-v2.1))
 * [gliner multitask large 0.5](https://huggingface.co/onnx-community/gliner-multitask-large-v0.5) ([original](https://huggingface.co/knowledgator/gliner-multitask-large-v0.5))
 
-
-
-To run the examples without any modification, this file structure is expected:
-
-For token-mode:
-```
-models/gliner-multitask-large-v0.5/tokenizer.json
-models/gliner-multitask-large-v0.5/onnx/model.onnx
-```
-
-For span-mode:
-```
-models/gliner_small-v2.1/tokenizer.json
-models/gliner_small-v2.1/onnx/model.onnx
-```
-
 The original GLiNER implementation also provides [some tools](https://github.com/urchade/GLiNER/blob/main/examples/convert_to_onnx.ipynb) to convert models by your own.
 
 
@@ -114,6 +98,22 @@ Expected output:
 2 | James Bond      | person     | 99.4%
 3 | Aston Martin    | vehicle    | 99.9%
 ```
+
+**You first need to get the models to run the examples** (see above). To run them without any modification, the following file structure is expected:
+
+For token-mode:
+```
+models/gliner-multitask-large-v0.5/tokenizer.json
+models/gliner-multitask-large-v0.5/onnx/model.onnx
+```
+
+For span-mode:
+```
+models/gliner_small-v2.1/tokenizer.json
+models/gliner_small-v2.1/onnx/model.onnx
+```
+
+Or you can just adapt the paths in the example code.
 
 ## ⚡️ GPU/NPU Inferences
 
@@ -183,14 +183,6 @@ The configuration of the test is similar to the above, except:
 
 (Comparison with the original implementation has yet to be done.)
 
-## 🧪 Current Status
-
-**Although it is sufficiently mature to be embraced by the community, the current version (0.9.x) should not be considered as production-ready.**
-
-For any critical use, it is advisable to wait until it has been extensively tested and `ort-2.0` (the ONNX runtime wrapper) has reached a stable release.
-
-The first stable, production-grade release will be labeled **1.0.0**.
-
 
 ## ⚙️ Design Principles
 
@@ -205,8 +197,8 @@ The implementation aims to clearly distinguish and comment each processing step,
 
 Default configurations are provided, but it should be easy to adapt them:
 
-* One can have a look at the `model::{pipeline, input, output}` modules to see how the pre- and post-processing steps are defined by implementing the `Pipeline` trait defined by [`ort`](https://github.com/fbilhaut/orp).
-* Others traits like `Splitter` or `Tokenizer` can be easily leveraged to experiment with other implementations of the text-processing steps.
+* One can have a look at the `model::{pipeline, input, output}` modules to see how the pre- and post-processing steps are defined by implementing the `Pipeline` trait defined by [`orp`](https://github.com/fbilhaut/orp).
+* Others traits like `Splitter` or `Tokenizer` can be easily leveraged to experiment with other implementations of the pre-processing steps.
 * While there is always room for improvement, special care has been taken to craft idiomatic, generic, commented, and efficient code.
 
 A matrix-level documentation of the processing pipelines is provided in `doc/Processing.[pdf,typ]`.

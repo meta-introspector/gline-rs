@@ -81,17 +81,20 @@ For complete working examples please refer to the `examples` directory.
 
 To leverage `gline-rs`, you need the appropriate models in [ONNX](https://onnx.ai) format.
 
-Ready-to-use models can be downloaded from 🤗 Hugging Face repositories. For example:
+Ready-to-use models can be downloaded from Hugging Face repositories. For example:
 
-* [gliner small 2.1](https://huggingface.co/onnx-community/gliner_small-v2.1) ([original](https://huggingface.co/urchade/gliner_small-v2.1))
-* [gliner multitask large 0.5](https://huggingface.co/onnx-community/gliner-multitask-large-v0.5) ([original](https://huggingface.co/knowledgator/gliner-multitask-large-v0.5))
+| Model                                                                                         | ONNX                                                                      | Mode  |
+|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|-------|
+| [gliner small 2.1](https://huggingface.co/urchade/gliner_small-v2.1)                          | [link](https://huggingface.co/onnx-community/gliner_small-v2.1)           | Span  |
+| [gliner multitask large 0.5](https://huggingface.co/knowledgator/gliner-multitask-large-v0.5) | [link](https://huggingface.co/onnx-community/gliner-multitask-large-v0.5) | Token |
+| [gliner-x-large](https://huggingface.co/knowledgator/gliner-x-large)                          | [link](https://huggingface.co/knowledgator/gliner-x-large/tree/main/onnx) | Span  |
 
 The original GLiNER implementation also provides [some tools](https://github.com/urchade/GLiNER/blob/main/examples/convert_to_onnx.ipynb) to convert models by your own.
 
 
 ## 🚀 Running the Examples
 
-They are located in the `examples` directory. For instance in token mode:
+They are located in the `examples` directory. For instance, in token mode:
 
 ```bash
 $ cargo run --example token-mode
